@@ -1,0 +1,56 @@
+//
+// Simple architecture of layered WSN simulator,
+// highlighting ability to communicate between layers
+//
+architecture LogicalView
+{
+	// Rationale descriptors
+	rationale R1() {
+		reason #'Use layered architecture style';
+	}
+
+	// Templates
+	template ServerComponent() {
+		provides IData;
+		requires ISensor;
+	}
+	template CommsComponent() {
+		requires IStorage;
+		provides IData;
+		requires ISensor;
+	}
+	template StorageComponent() {
+		provides IStorage;
+	}
+	template ClientComponent() {
+		requires IData;
+		provides ISensor;
+		requires IRep;
+	}
+	template RepoComponent() {
+		provides IRep;
+	}
+
+	// Runtime Static model
+	system StaticModel
+	{
+		layer ServerLayer because R1()
+		{
+			component server_comms = CommsComponent();
+			component storage = StorageComponent();
+			link server_comms.IStorage to storage.IStorage;
+		}
+
+		layer ClientLayer because R1()
+		{
+			component client_comms = ClientComponent();
+			component data_repo = RepoComponent();
+
+			link client_comms.IRep to data_repo.IRep;
+		}
+
+		link ServerLayer 
+
+
+	}
+}

@@ -1,0 +1,22 @@
+SH to do
+
+fucking get this done!!
+by THURSDAY 10.30am
+
+- 'we want to see something happen on the screen'
+
+conceptually
+- best way of relating examples to one another
+- annotations?
+- how to link across views
+
+programmatically
+- transpose examples to grasp (quick)
+- take grasp parse it through compiler
+-- syntax checking
+
+
+visually
+
+create new organic links between any two objects
+- be they components, layers, etc..
