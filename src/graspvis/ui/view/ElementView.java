@@ -109,8 +109,9 @@ public class ElementView extends PApplet {
 		}
 		// edit codebase here
 		if (mouseButton == RIGHT) {
-			System.out.println("respond to right click..");
-			
+			//System.out.println("respond to right click..");
+			// create new contextual menu with different functions
+			//this.draw();
 		}
 		
 	}

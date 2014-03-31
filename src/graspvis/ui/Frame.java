@@ -2,6 +2,7 @@ package graspvis.ui;
 
 import graspvis.controller.FrameController;
 import graspvis.exception.SystemException;
+import graspvis.util.Session;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -30,6 +31,7 @@ public class Frame extends JFrame{
 	private JMenuBar menuBar;
 	private JMenu mnFile;
 	private JMenuItem mntmOpen;
+	private JMenuItem mntmOpenSec;
 	private JPanel northBorder;
 	private JPanel southBorder;
 	private JPanel westBorder;
@@ -39,7 +41,7 @@ public class Frame extends JFrame{
 	private JPanel section3Panel;
 	private JPanel section4Panel;
 	private JMenu mnView;
-	private JMenuItem mntmViewConviguration;
+	private JMenuItem mntmViewConfiguration;
 	
 	public Frame(FrameController theController) {
 		controller = theController;
@@ -93,12 +95,16 @@ public class Frame extends JFrame{
 		mntmOpen.addActionListener(buttonListener);
 		mnFile.add(mntmOpen);
 		
+		mntmOpenSec = new JMenuItem("Open second view");
+		mntmOpenSec.addActionListener(buttonListener);
+		mnFile.add(mntmOpenSec);
+		
 		mnView = new JMenu("View");
 		menuBar.add(mnView);
 		
-		mntmViewConviguration = new JMenuItem("View Conviguration");
-		mntmViewConviguration.addActionListener(buttonListener);
-		mnView.add(mntmViewConviguration);
+		mntmViewConfiguration = new JMenuItem("View Configuration");
+		mntmViewConfiguration.addActionListener(buttonListener);
+		mnView.add(mntmViewConfiguration);
 	}
 
 	public void showApplet() throws SystemException {
@@ -215,8 +221,12 @@ public class Frame extends JFrame{
 			if (e.getSource().equals(mntmOpen)) {
 				controller.openFile();
 			}
-			if (e.getSource().equals(mntmViewConviguration)) {
+			if (e.getSource().equals(mntmViewConfiguration)) {
 				controller.configureViews();
+			}
+			if (e.getSource().equals(mntmOpenSec)) {
+				Session.getSession().put("viewSecExists", true);
+				controller.openFile();
 			}
 		}
 		

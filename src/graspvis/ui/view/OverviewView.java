@@ -118,6 +118,15 @@ public class OverviewView extends PApplet{
 	}
 
 	public void mousePressed() {
+		if (mouseButton == RIGHT) {
+			RelationshipType relType = graspvis.model.RelationshipType.CONNECTION;
+			Node fromNode = highlightedNode;
+			Node toNode = drawGraph.getNode(mouseX, mouseY);
+			String id = fromNode.toString() + "_" + toNode.toString() + "_" + relType.toString();
+			graph.addSpring(id, fromNode, fromNode, toNode, toNode, relType);
+			setGraph(graph);
+			this.setup();
+		}
 		Node n = drawGraph.getNode(mouseX, mouseY);
 		selectedNode = n;
 		if (n != null) {

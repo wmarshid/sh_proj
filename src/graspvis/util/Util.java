@@ -10,7 +10,7 @@ import java.util.Random;
 import processing.core.PApplet;
 
 /**
- * Util class, some of the functionalities are adopted from Pocessing 
+ * Util class, some of the functionalities are adopted from Processing 
  * <a href="http://processing.org/">http://processing.org/</a>
  * @author nauval
  *

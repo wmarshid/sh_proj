@@ -54,6 +54,9 @@ public class FrameController {
 	
 	private PApplet[] views;
 	
+	private boolean viewExists = false;
+	private Object keyFile = null;
+	
 	public FrameController() {
 		executor = new Executor();
 		dfsTraversal = new GraphTraversal();
@@ -73,14 +76,15 @@ public class FrameController {
 
 	public void openFile() {
 		getFile();
-		String file = (String) Session.getSession().get(Session.Key.SOURCE_FILE);
+		//String file = (String) Session.getSession().get(Session.Key.SOURCE_FILE);
+		String file = (String) Session.getSession().get(keyFile);
 		
 		if (file != null) {
 			try {
 				architecture = executor.execute(file);
 			} catch (CompilationException e) {
 				JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-				Session.getSession().remove(Session.Key.SOURCE_FILE);
+				Session.getSession().remove(keyFile);
 				e.printStackTrace();
 			}
 			if (architecture != null) {
@@ -88,10 +92,15 @@ public class FrameController {
 				dfsTraversal.setArchitecture(architecture);
 				graph = dfsTraversal.traverse();
 				initColor(graph);
-				for (PApplet view : views) {
-					if (view instanceof OverviewView) {
-						((OverviewView) view).setGraph(graph);
-					}
+				//for (PApplet view : views) {
+				//	if (view instanceof OverviewView) {
+				//		((OverviewView) view).setGraph(graph);
+				//	}
+				//}
+				PApplet view = views[0];
+				if (keyFile == Session.Key.VIEW_FILE) view = views[1];
+				if (view instanceof OverviewView) {
+					((OverviewView) view).setGraph(graph);
 				}
 			}
 		}
@@ -172,11 +181,17 @@ public class FrameController {
 			}
 		});
 		int returnVal = fc.showOpenDialog(frame);
+		
+		keyFile = Session.Key.SOURCE_FILE;
+		if (viewExists) {
+			keyFile = Session.Key.VIEW_FILE;
+		}
 
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = fc.getSelectedFile();
 			try {
-				Session.getSession().put(Session.Key.SOURCE_FILE, file.getCanonicalPath());
+				Session.getSession().put(keyFile, file.getCanonicalPath());
+				viewExists = true;
 			} catch (IOException e1) {
 				Session.getSession().remove(Session.Key.SOURCE_FILE);
 				JOptionPane.showMessageDialog(frame, "Error while opening file", "Error", 
@@ -184,6 +199,27 @@ public class FrameController {
 			}
 		}
 	}
+	
+	private void addView() {
+		Object keyFileArr = Session.Key.VIEW_FILES;
+		Session viewSesh = Session.getSession();
+		Object fileArr = viewSesh.get(keyFileArr);
+		if ( fileArr != null) {
+			System.out.println("fileArr not null");
+		}
+		
+	}
+	
+	private Object retrieveView(int num) {
+		Object obj = null;
+		return obj;
+		
+	}
+	
+	private Object focusView(int num) {
+		return retrieveView(num);
+	}
+	
 
 	private void showViewConfigurationDialog() {
 		ViewConfigurationDialog dialog = new ViewConfigurationDialog(frame, true);

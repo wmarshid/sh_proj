@@ -55,6 +55,7 @@ public class FDLayout implements Algorithm {
 				Node to = spring.getToNode();
 				Node ifaceTo = spring.getHookTo();
 				
+				System.out.println("var dump.. " + from + " " + ifaceFrom + " " + to + " " + ifaceTo);
 				adjustInterfacePosition(from, ifaceFrom, to, ifaceTo);
 			}
 		}

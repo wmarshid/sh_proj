@@ -76,7 +76,7 @@ public class ViewConfigurationDialog extends JDialog {
 		btnDefault = new JButton("Default");
 		btnDefault.addActionListener(listener);
 		
-		lblViewConfiguration = new JLabel("View Conviguration");
+		lblViewConfiguration = new JLabel("View Configuration");
 		GroupLayout gl_mainPanel = new GroupLayout(mainPanel);
 		gl_mainPanel.setHorizontalGroup(
 			gl_mainPanel.createParallelGroup(Alignment.LEADING)

@@ -45,7 +45,7 @@ public class Executor {
 		logger.print("Printing architecture graph...");
 		printArchitecture(graph, 0);
 
-		//logger.print("Compilation successfull.");
+		//logger.print("Compilation successful.");
 		logger.shutdown();
 		return graph;
 	}

@@ -14,14 +14,16 @@ public class Session {
 	/**
 	 * Sets of default keys that are used to store data in the session
 	 */
-	public enum Key {SOURCE_FILE, VIEW_CONFIGURATION}
+	public enum Key {SOURCE_FILE, VIEW_FILE, VIEW_FILES, VIEW_CONFIGURATION}
 	
 	private Map<Object, Object> map;
+	private Map<Object, Object[]> viewmap;
 	
 	private static final Session INSTANCE = new Session();
 	
 	private Session() {
 		map = new HashMap<Object, Object>();
+		viewmap = new HashMap<Object, Object[]>();
 	}
 	
 	/**
